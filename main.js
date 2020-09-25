@@ -1,15 +1,15 @@
-//Global Variables//
-
+//GLOBAL VARIABLES//
 var APIKey = "90d4018edda83b7466b5bc9d425686c1"
 
 
 var cityList = []
 
 var date = moment().format('dddd, MMMM h:mm');
+//DATE FUNCTION//
 $('#date').prepend(date)
 
 $(document).ready(function () {
-
+    defaultSearch();
     $('#search-btn').on('click', function (event) {
         event.preventDefault();
         var city = $('#searchTerm').val();
@@ -39,7 +39,7 @@ $(document).ready(function () {
         for (var i = 0; i < cityList.length; i++) {
             var cityName = cityList[i];
             var historyBtn = $(
-                '<button type="button" class="btn btn-primary btn-lg btn-block historyBtn">'
+                '<button type="button" class="btn btn-lg btn-block historyBtn">'
             ).text(cityName);
             $('.searchHistory').append(historyBtn);
         }
@@ -66,39 +66,52 @@ $(document).ready(function () {
                 'src',
                 `http://openweathermap.org/img/wn/${response.weather[0].icon}@2x.png`)
             $.ajax({
-                    url: "https://api.openweathermap.org/data/2.5/onecall?lat=" + latitude + "&lon=" + longitude + "&units=imperial" + "&appid=" + APIKey,
-                    method: "GET"
-                }).then(function (response) {
+                url: "https://api.openweathermap.org/data/2.5/onecall?lat=" + latitude + "&lon=" + longitude + "&units=imperial" + "&appid=" + APIKey,
+                method: "GET"
+            }).then(function (response) {
+                for (var j = 1; j < 6; j++) {
+                    $(`#${j}img`).attr(
+                        'src',
+                        `http://openweathermap.org/img/wn/${response.daily[j].weather[0].icon}@2x.png`
+                    );
+                    $(`#${j}temp`).html(
+                        `Temp: ${response.daily[j].temp.day} &#8457;`
+                    );
+                    $(`#${j}humid`).html(
+                        `Humidity: ${response.daily[j].humidity}%`
+                    );
+                }
+                console.log(response)
+                var tempEl = $('#todaysTemp');
+                tempEl.empty();
+                var todayWeatherTemp = response.current.temp
+                tempEl.append("Temp: " + todayWeatherTemp.toFixed(2) + " F");
+                var humidityEl = $("#humidity")
+                humidityEl.empty();
+                var todayHumidity = response.current.humidity
+                humidityEl.append("Humidity: " + todayHumidity + "%");
+                var windEl = $('#windSpeed');
+                windEl.empty();
+                todayWind = response.current.wind_speed
+                windEl.append("Wind Speed: " + todayWind + "MPH");
+                var UVEl = $('#UVIndex')
+                UVEl.empty()
+                todayUV = response.current.uvi
+                UVEl.append("<span class='uv'>" + "UV Index: " + todayUV + "</span>")
 
-                    console.log(response)
-                    var tempEl = $('#todaysTemp');
-                    tempEl.empty();
-                    var todayWeatherTemp = response.current.temp
-                    tempEl.append("Temp: " + todayWeatherTemp.toFixed(2) + " F");
-                    var humidityEl = $("#humidity")
-                    humidityEl.empty();
-                    var todayHumidity = response.current.humidity
-                    humidityEl.append("Humidity: " + todayHumidity + "%");
-                    var windEl = $('#windSpeed');
-                    windEl.empty();
-                    todayWind = response.current.wind_speed
-                    windEl.append("Wind Speed: " + todayWind + "MPH");
-                    var UVEl = $('#UVIndex')
-                    UVEl.empty()
-                    todayUV = response.current.uvi
-                    UVEl.append("UV Index: " + todayUV)
-                    UVEl.css("display", "block")
-
-                    if (todayUV < 2) {
-                        $(UVEl).css("color", "green")
-                    } else if (todayUV >= 2 && todayUV < 6) {
-                        $(UVEl).css("color", "yellow")
-                    } else if (todayUV > 6) {
-                        $(UVEl).css("color", "red")
-                    }
+                if (todayUV < 2) {
+                    $('.uv').css("color", "green")
+                } else if (todayUV >= 2 && todayUV < 6) {
+                    $('.uv').css("color", "yellow")
+                } else if (todayUV > 6) {
+                    $('.uv').css("background", "red")
+                }
 
 
-                });
+            });
         });
     };
+    function defaultSearch() {
+        return weatherGenerator('Richmond')
+     }
 });
