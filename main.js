@@ -69,7 +69,26 @@ $(document).ready(function () {
                 url: "https://api.openweathermap.org/data/2.5/onecall?lat=" + latitude + "&lon=" + longitude + "&units=imperial" + "&appid=" + APIKey,
                 method: "GET"
             }).then(function (response) {
-                for (var j = 1; j < 6; j++) {
+                var fiveDayForcast = $('#5-day-row')
+                fiveDayForcast.empty()
+                for (var j = 0; j < 6; j++) {
+                    var cardContainer = $('<div class="card-container">')
+                    var card = $('<div class="card">')
+                    var cardHeader = $('<div class="card-header">')
+                    var cardBody = $('<div class="card-body">')
+                    var img = $(`<img id="${j}img">`)
+                    var cardTextTemp = $('<p class="card-text">')
+                    var cardTextHumid = $('<p class="card-text">')
+                    card.addClass("text-white mb-3 col-3")
+                    card.attr("style", "max-width: 15rem")
+                    cardTextTemp.attr("id", `${j}temp`)
+                    cardTextHumid.attr("id", `${j}humid`)
+                    cardHeader.attr("id", `${j}Date`)
+                    var cardArray = [img, cardTextTemp, cardTextHumid]
+                    cardBody.append(cardArray)
+                    card.append([cardHeader, cardBody])
+                    cardContainer.append(card)
+                    fiveDayForcast.append(cardContainer)
                     $(`#${j}img`).attr(
                         'src',
                         `http://openweathermap.org/img/wn/${response.daily[j].weather[0].icon}@2x.png`
@@ -113,5 +132,5 @@ $(document).ready(function () {
     };
     function defaultSearch() {
         return weatherGenerator('Richmond')
-     }
+    }
 });
