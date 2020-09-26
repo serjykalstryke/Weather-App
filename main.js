@@ -22,6 +22,9 @@ $(document).ready(function () {
         weatherGenerator(city);
         console.log(cityList)
     });
+    $('#home-btn').on('click', function (event) {
+        defaultSearch()
+    });
 
     $('.searchHistory').on('click', '.historyBtn', function (event) {
         event.preventDefault();
