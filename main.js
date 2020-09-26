@@ -90,7 +90,7 @@ $(document).ready(function () {
                     card.append([cardHeader, cardBody])
                     cardContainer.append(card)
                     fiveDayForcast.append(cardContainer)
-                    var days = ["Tomorrow", "2 days from now", "3 days from now", "4 days from now", "5 days from now", "6 days from now"]
+                    var days = ["Tomorrow", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6"]
                     $(`#${j}img`).attr(
                         'src',
                         `http://openweathermap.org/img/wn/${response.daily[j].weather[0].icon}@2x.png`
