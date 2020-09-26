@@ -32,3 +32,6 @@ WHEN I open the weather dashboard
 THEN I am presented with the last searched city forecast
 ```
 
+<img src="https://i.ibb.co/LZJL2Dy/Screenshot-from-2020-09-25-23-22-47.png" alt="Screenshot-from-2020-09-25-23-22-47" border="0">
+
+https://serjykalstryke.github.io/Weather-App/
