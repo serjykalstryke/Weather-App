@@ -1,13 +1,10 @@
 //GLOBAL VARIABLES//
 var APIKey = "90d4018edda83b7466b5bc9d425686c1"
-
-
 var cityList = []
-
 var date = moment().format('dddd, MMMM Do');
 //DATE FUNCTION//
 $('#date').prepend(date)
-
+//clicker function for search button//
 $(document).ready(function () {
     defaultSearch();
     $('#search-btn').on('click', function (event) {
@@ -22,21 +19,22 @@ $(document).ready(function () {
         weatherGenerator(city);
         console.log(cityList)
     });
+    //clicker function for home button, calls default search function to show local weather//
     $('#home-btn').on('click', function (event) {
         defaultSearch()
     });
-
+    //function for previous search history buttons//
     $('.searchHistory').on('click', '.historyBtn', function (event) {
         event.preventDefault();
         var cityBtn = $(this).text()
         console.log(cityBtn)
         weatherGenerator(cityBtn);
     });
-
+    //stores searched cities//
     function storeCities() {
         localStorage.setItem('cityList', JSON.stringify(cityList));
     }
-
+    //generates buttons for previous searches//
     function renderButtons() {
         $('.searchHistory').html('');
         for (var i = 0; i < cityList.length; i++) {
@@ -47,7 +45,7 @@ $(document).ready(function () {
             $('.searchHistory').append(historyBtn);
         }
     }
-
+//weather generator function, calls openweather API to populate app//
     function weatherGenerator(cityBtn) {
         var cityName = cityBtn || $('#searchTerm').val();
         console.log(cityName);
@@ -137,11 +135,12 @@ $(document).ready(function () {
             });
         });
     };
+
+    //initial search function that populates app with local weather data//
     function defaultSearch() {
         navigator.geolocation.getCurrentPosition((position) => {
             var positionArray = [position.coords.latitude, position.coords.longitude];
             console.log(positionArray)
-            // return weatherGenerator(positionArray)
         $.ajax({
             url: "https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=" + positionArray[0] + "&longitude=" + positionArray[1] + "&localityLanguage=en",
             method: "GET"

@@ -21,7 +21,9 @@ h1, h2, h3, p {
 
 @media only screen and (max-width: 600px) {
    .card, .card-header, .card-body, img, .card-text {
+       display: flex;
+       flex-direction: column;
        width: 100%;
-       height: auto
+       height: auto;
    }
 }
