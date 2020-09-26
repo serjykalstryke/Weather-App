@@ -4,7 +4,7 @@ var APIKey = "90d4018edda83b7466b5bc9d425686c1"
 
 var cityList = []
 
-var date = moment().format('dddd, MMMM h:mm');
+var date = moment().format('dddd, MMMM Do h:mm');
 //DATE FUNCTION//
 $('#date').prepend(date)
 
@@ -82,7 +82,7 @@ $(document).ready(function () {
                     var img = $(`<img id="${j}img">`)
                     var cardTextTemp = $('<p class="card-text">')
                     var cardTextHumid = $('<p class="card-text">')
-                    card.addClass("text-white mb-3 col-3")
+                    card.addClass("mb-3 col-3")
                     card.attr("style", "max-width: 15rem")
                     cardTextTemp.attr("id", `${j}temp`)
                     cardTextHumid.attr("id", `${j}humid`)
@@ -92,6 +92,7 @@ $(document).ready(function () {
                     card.append([cardHeader, cardBody])
                     cardContainer.append(card)
                     fiveDayForcast.append(cardContainer)
+                    var days = ["Tomorrow", "2 days from now", "3 days from now", "4 days from now", "5 days from now", "6 days from now"]
                     $(`#${j}img`).attr(
                         'src',
                         `http://openweathermap.org/img/wn/${response.daily[j].weather[0].icon}@2x.png`
@@ -102,6 +103,9 @@ $(document).ready(function () {
                     $(`#${j}humid`).html(
                         `Humidity: ${response.daily[j].humidity}%`
                     );
+                    $(`#${j}Date`).html(
+                        days[j]
+                    )
                 }
                 console.log(response)
                 var tempEl = $('#todaysTemp');

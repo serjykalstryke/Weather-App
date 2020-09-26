@@ -13,3 +13,16 @@ h1, h2, h3, p {
 .header {
     color: #fff
 }
+
+#home-btn {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+@media only screen and (max-width: 600px) {
+    #home-btn {
+        width: 80%;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
