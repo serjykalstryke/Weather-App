@@ -131,6 +131,20 @@ $(document).ready(function () {
         });
     };
     function defaultSearch() {
-        return weatherGenerator('Richmond')
-    }
+        navigator.geolocation.getCurrentPosition((position) => {
+            var positionArray = [position.coords.latitude, position.coords.longitude];
+            console.log(positionArray)
+            // return weatherGenerator(positionArray)
+        $.ajax({
+            url: "https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=" + positionArray[0] + "&longitude=" + positionArray[1] + "&localityLanguage=en",
+            method: "GET"
+        }).then(function (response) {
+            console.log(response)
+            var city = response.city
+            weatherGenerator(city)
+            })
+          });
+        }
+
 });
+
