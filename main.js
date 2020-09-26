@@ -40,7 +40,7 @@ $(document).ready(function () {
         for (var i = 0; i < cityList.length; i++) {
             var cityName = cityList[i];
             var historyBtn = $(
-                '<button type="button" class="btn btn-lg btn-block historyBtn">'
+                '<button type="button" class="btn btn-lg btn-block historyBtn text-white">'
             ).text(cityName);
             $('.searchHistory').append(historyBtn);
         }
