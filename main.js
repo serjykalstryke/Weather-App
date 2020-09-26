@@ -4,7 +4,7 @@ var APIKey = "90d4018edda83b7466b5bc9d425686c1"
 
 var cityList = []
 
-var date = moment().format('dddd, MMMM Do h:mm');
+var date = moment().format('dddd, MMMM Do');
 //DATE FUNCTION//
 $('#date').prepend(date)
 
