@@ -4,9 +4,10 @@ var cityList = []
 var date = moment().format('dddd, MMMM Do');
 //DATE FUNCTION//
 $('#date').prepend(date)
-//clicker function for search button//
+//on start, execute this function//
 $(document).ready(function () {
     defaultSearch();
+    //clicker function for search button//
     $('#search-btn').on('click', function (event) {
         event.preventDefault();
         var city = $('#searchTerm').val();
@@ -124,9 +125,9 @@ $(document).ready(function () {
                 UVEl.append("<span class='uv'>" + "UV Index: " + todayUV + "</span>")
 
                 if (todayUV < 2) {
-                    $('.uv').css("color", "green")
+                    $('.uv').css("background", "green")
                 } else if (todayUV >= 2 && todayUV < 6) {
-                    $('.uv').css("color", "yellow")
+                    $('.uv').css("background", "yellow")
                 } else if (todayUV > 6) {
                     $('.uv').css("background", "red")
                 }
