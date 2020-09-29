@@ -75,7 +75,7 @@ $(document).ready(function () {
                 fiveDayForcast.empty()
                 for (var j = 0; j < 6; j++) {
                     var cardContainer = $('<div class="card-container">')
-                    var card = $('<div class="card">')
+                    var card = $('<div class="card bg-secondary m">')
                     var cardHeader = $('<div class="card-header">')
                     var cardBody = $('<div class="card-body">')
                     var img = $(`<img id="${j}img">`)
@@ -91,7 +91,9 @@ $(document).ready(function () {
                     card.append([cardHeader, cardBody])
                     cardContainer.append(card)
                     fiveDayForcast.append(cardContainer)
-                    var days = ["Tomorrow", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6"]
+                    var alteredArr = response.daily;
+                    var timeStamp = alteredArr[j].dt;
+                    var date = moment(timeStamp * 1000).format("dddd");
                     $(`#${j}img`).attr(
                         'src',
                         `http://openweathermap.org/img/wn/${response.daily[j].weather[0].icon}@2x.png`
@@ -103,7 +105,7 @@ $(document).ready(function () {
                         `Humidity: ${response.daily[j].humidity}%`
                     );
                     $(`#${j}Date`).html(
-                        days[j]
+                        date
                     )
                 }
                 console.log(response)
