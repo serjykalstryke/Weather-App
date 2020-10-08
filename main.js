@@ -7,7 +7,7 @@ $('#date').prepend(date)
 //on start, execute this function//
 $(document).ready(function () {
     defaultSearch();
-    renderButtons();
+    renderButtons()
     //clicker function for search button//
     $('#search-btn').on('click', function (event) {
         event.preventDefault();
@@ -40,7 +40,8 @@ $(document).ready(function () {
     function renderButtons() {
         $('.searchHistory').html('');
         for (var i = 0; i < cityList.length; i++) {
-            var cityName = cityList[i];
+            var cityNameJSON = JSON.parse(localStorage.getItem('cityList'));
+            var cityName = cityNameJSON[i]
             var historyBtn = $(
                 '<button type="button" class="btn btn-lg btn-block historyBtn text-white">'
             ).text(cityName);
