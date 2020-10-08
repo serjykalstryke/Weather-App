@@ -7,6 +7,7 @@ $('#date').prepend(date)
 //on start, execute this function//
 $(document).ready(function () {
     defaultSearch();
+    renderButtons();
     //clicker function for search button//
     $('#search-btn').on('click', function (event) {
         event.preventDefault();
