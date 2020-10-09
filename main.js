@@ -1,11 +1,13 @@
 //GLOBAL VARIABLES//
 var APIKey = "90d4018edda83b7466b5bc9d425686c1"
-var cityList = []
+var cityList = JSON.parse(localStorage.getItem("cityList")) || [];
+var cityJSON = localStorage.setItem('cityList',JSON.stringify(cityList))
 var date = moment().format('dddd, MMMM Do');
 //DATE FUNCTION//
 $('#date').prepend(date)
 //on start, execute this function//
 $(document).ready(function () {
+    loadCities();
     defaultSearch();
     renderButtons()
     //clicker function for search button//
@@ -36,12 +38,16 @@ $(document).ready(function () {
     function storeCities() {
         localStorage.setItem('cityList', JSON.stringify(cityList));
     }
+
+    function loadCities() {
+        cityList = JSON.parse(localStorage.getItem("cityList") )
+    }
     //generates buttons for previous searches//
     function renderButtons() {
         $('.searchHistory').html('');
         for (var i = 0; i < cityList.length; i++) {
-            var cityNameJSON = JSON.parse(localStorage.getItem('cityList'));
-            var cityName = cityNameJSON[i]
+
+            var cityName = cityList[i]
             var historyBtn = $(
                 '<button type="button" class="btn btn-lg btn-block historyBtn text-white">'
             ).text(cityName);
