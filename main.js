@@ -7,8 +7,8 @@ var date = moment().format('dddd, MMMM Do');
 $('#date').prepend(date)
 //on start, execute this function//
 $(document).ready(function () {
+    defaultSearch()
     loadCities();
-    defaultSearch();
     renderButtons()
     //clicker function for search button//
     $('#search-btn').on('click', function (event) {
@@ -157,7 +157,7 @@ $(document).ready(function () {
             method: "GET"
         }).then(function (response) {
             console.log(response)
-            var city = response.city
+            var city = response.locality
             weatherGenerator(city)
             })
           });
